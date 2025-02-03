@@ -3,6 +3,7 @@
 //
 
 #include "FileManager.h"
+
 using namespace std;
 
 FileManager::FileManager (const QString &fileName)
@@ -30,12 +31,6 @@ QByteArray FileManager::readFile() {
     }
 };
 
-bool FileManager::writeFile(const QByteArray& data) {
-    cout << file.isOpen() << endl;
-    if (file.isOpen()) {
+void FileManager::writeFile(const QByteArray& data) {
         file.write(data);
-        return true;
-    } else {
-        return false;
-    }
 };

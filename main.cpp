@@ -9,7 +9,6 @@
 #include <QLabel>
 #include <QMessageBox>
 #include <QString>
-#include <iostream>
 using namespace std;
 
 int main(int argc, char *argv[]) {
@@ -37,15 +36,18 @@ int main(int argc, char *argv[]) {
     QAction *encodeAction = new QAction("Koduj", &window);
     QAction *decodeAction = new QAction("Dekoduj", &window);
 
-    // Obluga zdarzen (klikniecie)
-    fileMenu->addAction(openAction);
-    fileMenu->addAction(encodeAction);
-    fileMenu->addAction(decodeAction);
-
+    // Deklaracja i inicjalizacja zmiennych, ktore sluza do pracy z plikami oraz do kodowania Huffmana
     FileManager* sourceFileManager = nullptr;
     FileManager* destinationFileManager = nullptr;
     HuffmanCodec codec = HuffmanCodec();
 
+    // Obsluga zdarzen w aplikacji Qt
+    fileMenu->addAction(openAction);
+    fileMenu->addAction(encodeAction);
+    fileMenu->addAction(decodeAction);
+
+    /* Funkcja lambda po nacisnieciu przycisku otworz otwiera eksplorator plikow i tworzy nowa instancje
+     * klasy FileManager. Jesli nie uda sie otworzyc pliku, to wyswietla sie komunikat o niepowodzeniu*/
     QObject::connect(openAction, &QAction::triggered, [&]() {
         QString fileName = QFileDialog::getOpenFileName(&window, "Otworz plik");
         if (!fileName.isEmpty()) {
@@ -56,6 +58,13 @@ int main(int argc, char *argv[]) {
         }
     });
 
+    /* Funkcja lambda po nacisnieciu przycisku koduj pokazuje komunikat, aby najpierw otworzyc plik
+     * zrodlowy (jesli nie wybrano wczesniej). Jesli uzytkownik wybral juz plik zrodlowy, to funkcja wyswietla
+     * eksplorator plikow, ktory prosi o wybranie pliku docelowego (albo jego utworzenie). Jesli nie uda sie
+     * otworzyc pliku docelowego, to wyswietlany jest komunikat o niepowodzeniu. Jesli uda sie otworzyc plik
+     * docelowy, to funkcja lambda wzywa metode encodeFile() obiektu codec, ktora odpowiada za zakodowanie danych metoda huffmana.
+     * Nastepnie zakodowane dane sa zapisywane do pliku docelowego, ktory zostaje potem zamkniety.
+     */
     QObject::connect(encodeAction, &QAction::triggered, [&]() {
         if (!sourceFileManager) {
             QMessageBox::critical(nullptr, "Blad", "Najpierw otwórz plik.");
@@ -72,7 +81,18 @@ int main(int argc, char *argv[]) {
         }
     });
 
+    /*Funkcja lambda po nacisnieciu przyciku dekoduj pokazuje komunikat, aby najpierw otworzyc plik
+     * zrodlowy (jesli nie wybrano wczesniej). Jesli uzytkownik wybral juz plik zrodlowy, to funkcja wyswietla
+     * eksplorator plikow, ktory prosi o wybranie pliku docelowego (albo jego utworzenie). Jesli nie uda sie
+     * otworzyc pliku docelowego, to wyswietlany jest komunikat o niepowodzeniu. Jesli uda sie otworzyc plik docelowy,
+     * to funkcja lambda wzywa metode decodeFile() obiektu codec, ktora odpowiada za odkodowanie danych zakodowanych
+     * metoda Huffmana.
+     */
     QObject::connect(decodeAction, &QAction::triggered, [&]() {
+        if (!sourceFileManager) {
+            QMessageBox::critical(nullptr, "Blad", "Najpierw otwórz plik.");
+            return;
+        }
         QString outputPath = QFileDialog::getSaveFileName(&window, "Zapisz zdekodowany plik", "", "Wszystkie pliki (*.*)");
         destinationFileManager = new FileManager(outputPath);
         if (destinationFileManager->openFile()) {

@@ -2,8 +2,8 @@ CMakeFiles/kodowanie_huffmana.dir/FileManager.cpp.o.ddi: \
  /home/peccator/CLionProjects/kodowanie_huffmana/FileManager.cpp \
  /usr/include/stdc-predef.h \
  /home/peccator/CLionProjects/kodowanie_huffmana/FileManager.h \
- /usr/include/qt/QtWidgets/QApplication \
- /usr/include/qt/QtWidgets/qapplication.h \
+ /usr/include/qt/QtWidgets/QFileDialog \
+ /usr/include/qt/QtWidgets/qfiledialog.h \
  /usr/include/qt/QtWidgets/qtwidgetsglobal.h \
  /usr/include/qt/QtGui/qtguiglobal.h /usr/include/qt/QtCore/qglobal.h \
  /usr/include/c++/14.2.1/type_traits \
@@ -126,12 +126,11 @@ CMakeFiles/kodowanie_huffmana.dir/FileManager.cpp.o.ddi: \
  /usr/include/qt/QtCore/qversiontagging.h \
  /usr/include/qt/QtGui/qtgui-config.h \
  /usr/include/qt/QtWidgets/qtwidgets-config.h \
- /usr/include/qt/QtCore/qcoreapplication.h \
- /usr/include/qt/QtCore/qstring.h /usr/include/qt/QtCore/qchar.h \
- /usr/include/qt/QtCore/qbytearray.h /usr/include/qt/QtCore/qrefcount.h \
- /usr/include/qt/QtCore/qnamespace.h /usr/include/qt/QtCore/qarraydata.h \
- /usr/include/string.h /usr/include/strings.h \
- /usr/include/c++/14.2.1/stdlib.h \
+ /usr/include/qt/QtCore/qdir.h /usr/include/qt/QtCore/qstring.h \
+ /usr/include/qt/QtCore/qchar.h /usr/include/qt/QtCore/qbytearray.h \
+ /usr/include/qt/QtCore/qrefcount.h /usr/include/qt/QtCore/qnamespace.h \
+ /usr/include/qt/QtCore/qarraydata.h /usr/include/string.h \
+ /usr/include/strings.h /usr/include/c++/14.2.1/stdlib.h \
  /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include/stdarg.h \
  /usr/include/c++/14.2.1/string \
  /usr/include/c++/14.2.1/bits/requires_hosted.h \
@@ -191,7 +190,9 @@ CMakeFiles/kodowanie_huffmana.dir/FileManager.cpp.o.ddi: \
  /usr/include/c++/14.2.1/bits/streambuf.tcc \
  /usr/include/qt/QtCore/qstringliteral.h \
  /usr/include/qt/QtCore/qstringalgorithms.h \
- /usr/include/qt/QtCore/qstringview.h /usr/include/qt/QtCore/qobject.h \
+ /usr/include/qt/QtCore/qstringview.h /usr/include/qt/QtCore/qfileinfo.h \
+ /usr/include/qt/QtCore/qfile.h /usr/include/qt/QtCore/qfiledevice.h \
+ /usr/include/qt/QtCore/qiodevice.h /usr/include/qt/QtCore/qobject.h \
  /usr/include/qt/QtCore/qobjectdefs.h \
  /usr/include/qt/QtCore/qobjectdefs_impl.h /usr/include/qt/QtCore/qlist.h \
  /usr/include/qt/QtCore/qalgorithms.h /usr/include/qt/QtCore/qiterator.h \
@@ -269,20 +270,12 @@ CMakeFiles/kodowanie_huffmana.dir/FileManager.cpp.o.ddi: \
  /usr/include/c++/14.2.1/optional /usr/include/c++/14.2.1/span \
  /usr/include/c++/14.2.1/variant /usr/include/c++/14.2.1/bits/unicode.h \
  /usr/include/c++/14.2.1/bits/unicode-data.h \
- /usr/include/qt/QtCore/qcoreevent.h /usr/include/qt/QtCore/qeventloop.h \
- /usr/include/qt/QtGui/qwindowdefs.h /usr/include/qt/QtCore/qpoint.h \
- /usr/include/qt/QtCore/qsize.h /usr/include/qt/QtCore/qmargins.h \
- /usr/include/qt/QtGui/qcursor.h /usr/include/qt/QtGui/qguiapplication.h \
- /usr/include/qt/QtGui/qinputmethod.h /usr/include/qt/QtCore/qlocale.h \
- /usr/include/qt/QtCore/qvariant.h /usr/include/qt/QtCore/qmap.h \
- /usr/include/qt/QtCore/qhash.h /usr/include/qt/QtCore/qshareddata.h \
- /usr/include/qt/QtWidgets/QFileDialog \
- /usr/include/qt/QtWidgets/qfiledialog.h /usr/include/qt/QtCore/qdir.h \
- /usr/include/qt/QtCore/qfileinfo.h /usr/include/qt/QtCore/qfile.h \
- /usr/include/qt/QtCore/qfiledevice.h /usr/include/qt/QtCore/qiodevice.h \
+ /usr/include/qt/QtCore/qshareddata.h /usr/include/qt/QtCore/qhash.h \
  /usr/include/qt/QtCore/qurl.h /usr/include/qt/QtWidgets/qdialog.h \
- /usr/include/qt/QtWidgets/qwidget.h /usr/include/qt/QtGui/qpaintdevice.h \
- /usr/include/qt/QtCore/qrect.h /usr/include/qt/QtGui/qpalette.h \
+ /usr/include/qt/QtWidgets/qwidget.h /usr/include/qt/QtGui/qwindowdefs.h \
+ /usr/include/qt/QtCore/qmargins.h /usr/include/qt/QtGui/qpaintdevice.h \
+ /usr/include/qt/QtCore/qrect.h /usr/include/qt/QtCore/qsize.h \
+ /usr/include/qt/QtCore/qpoint.h /usr/include/qt/QtGui/qpalette.h \
  /usr/include/qt/QtGui/qcolor.h /usr/include/qt/QtGui/qrgb.h \
  /usr/include/qt/QtGui/qrgba64.h /usr/include/qt/QtGui/qbrush.h \
  /usr/include/qt/QtGui/qmatrix.h /usr/include/qt/QtGui/qpolygon.h \
@@ -293,9 +286,5 @@ CMakeFiles/kodowanie_huffmana.dir/FileManager.cpp.o.ddi: \
  /usr/include/qt/QtCore/qsharedpointer_impl.h \
  /usr/include/qt/QtGui/qfont.h /usr/include/qt/QtGui/qfontmetrics.h \
  /usr/include/qt/QtGui/qfontinfo.h \
- /usr/include/qt/QtWidgets/qsizepolicy.h \
- /usr/include/qt/QtGui/qkeysequence.h \
- /usr/include/qt/QtWidgets/QMessageBox \
- /usr/include/qt/QtWidgets/qmessagebox.h \
- /usr/include/qt/QtCore/QTextStream /usr/include/qt/QtCore/qtextstream.h \
- /usr/include/c++/14.2.1/iostream
+ /usr/include/qt/QtWidgets/qsizepolicy.h /usr/include/qt/QtGui/qcursor.h \
+ /usr/include/qt/QtGui/qkeysequence.h

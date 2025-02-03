@@ -15,7 +15,7 @@ public:
     bool openFile();
     void closeFile();
     QByteArray readFile();
-    bool writeFile(const QByteArray& data);
+    void writeFile(const QByteArray& data);
 private:
     QFile file;
 };
