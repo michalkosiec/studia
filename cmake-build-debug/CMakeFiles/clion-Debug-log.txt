@@ -1,0 +1,4 @@
+/opt/clion-2024.3/bin/cmake/linux/x64/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/opt/clion-2024.3/bin/ninja/linux/x64/ninja -G Ninja -S /home/peccator/CLionProjects/kodowanie_huffmana -B /home/peccator/CLionProjects/kodowanie_huffmana/cmake-build-debug
+-- Configuring done (0.1s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/peccator/CLionProjects/kodowanie_huffmana/cmake-build-debug

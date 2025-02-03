@@ -1,0 +1,5 @@
+/home/peccator/CLionProjects/kodowanie_huffmana/cmake-build-debug/CMakeFiles/kodowanie_huffmana.dir
+/home/peccator/CLionProjects/kodowanie_huffmana/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/peccator/CLionProjects/kodowanie_huffmana/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/peccator/CLionProjects/kodowanie_huffmana/cmake-build-debug/CMakeFiles/kodowanie_huffmana_autogen_timestamp_deps.dir
+/home/peccator/CLionProjects/kodowanie_huffmana/cmake-build-debug/CMakeFiles/kodowanie_huffmana_autogen.dir

@@ -1,0 +1,7 @@
+ninja_dyndep_version = 1.0
+build CMakeFiles/kodowanie_huffmana.dir/main.cpp.o: dyndep
+
+build CMakeFiles/kodowanie_huffmana.dir/FileManager.cpp.o: dyndep
+
+build CMakeFiles/kodowanie_huffmana.dir/HuffmanCodec.cpp.o: dyndep
+
