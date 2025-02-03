@@ -297,4 +297,5 @@ CMakeFiles/kodowanie_huffmana.dir/FileManager.cpp.o.ddi: \
  /usr/include/qt/QtGui/qkeysequence.h \
  /usr/include/qt/QtWidgets/QMessageBox \
  /usr/include/qt/QtWidgets/qmessagebox.h \
- /usr/include/qt/QtCore/QTextStream /usr/include/qt/QtCore/qtextstream.h
+ /usr/include/qt/QtCore/QTextStream /usr/include/qt/QtCore/qtextstream.h \
+ /usr/include/c++/14.2.1/iostream

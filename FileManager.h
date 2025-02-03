@@ -5,20 +5,17 @@
 #ifndef FILEMANAGER_H
 #define FILEMANAGER_H
 
-#include <QApplication>
 #include <QFileDialog>
-#include <QMessageBox>
-#include <QTextStream>
 
 
 class FileManager {
 public:
     QString fileName;
-    FileManager(const QString &fileName);
+    FileManager(const QString& fileName);
     bool openFile();
     void closeFile();
-    QString readFile();
-    bool writeFile(QString &content);
+    QByteArray readFile();
+    bool writeFile(const QByteArray& data);
 private:
     QFile file;
 };

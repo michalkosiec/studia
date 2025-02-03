@@ -11,10 +11,9 @@ using namespace std;
 
 HuffmanCodec::HuffmanCodec() {}
 
-bool HuffmanCodec::encodeFile(const QString& filePath, const QString& outputPath) {
-    const QByteArray data = readFile(filePath);
+QByteArray HuffmanCodec::encodeFile(QByteArray data) {
     if (data.isEmpty()) {
-        return false;
+        return QByteArray();
     }
 
     const auto frequencies = calculateFrequencies(data);
@@ -35,18 +34,17 @@ bool HuffmanCodec::encodeFile(const QString& filePath, const QString& outputPath
     QByteArray encodedData = encodeData(data, codes);
     encodedData.prepend(header);
 
-    return writeFile(outputPath, encodedData);
+    return encodedData;
 }
 
-bool HuffmanCodec::decodeFile(const QString& filePath, const QString& outputPath) {
-    const QByteArray data = readFile(filePath);
+QByteArray HuffmanCodec::decodeFile(QByteArray data) {
     if (data.isEmpty()) {
-        return false;
+        return QByteArray();
     }
 
     const QByteArray decodedData = decodeData(data);
 
-    return writeFile(outputPath, decodedData);
+   return decodedData;
 };
 
 unordered_map<char, int> HuffmanCodec::calculateFrequencies(const QByteArray& data) {
@@ -101,25 +99,6 @@ unordered_map<char, string> HuffmanCodec::getHuffmanCodes(const shared_ptr<Huffm
     unordered_map<char, string> codes;
     generateHuffmanCodes(root, "", codes);
     return codes;
-}
-
-QByteArray HuffmanCodec::readFile(const QString& filePath) {
-    QFile file(filePath);
-    if (!file.open(QIODevice::ReadOnly)) {
-        return QByteArray();
-    } else {
-        return file.readAll();
-    }
-}
-
-bool HuffmanCodec::writeFile(const QString& outputPath, const QByteArray& data) {
-    QFile file(outputPath);
-    if (!file.open(QIODevice::WriteOnly)) {
-        return false;
-    }
-    file.write(data);
-    file.close();
-    return true;
 }
 
 QByteArray HuffmanCodec::encodeData(const QByteArray& data, const unordered_map<char, string>& codes) {

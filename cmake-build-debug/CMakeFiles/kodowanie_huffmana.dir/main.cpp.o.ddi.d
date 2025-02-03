@@ -298,10 +298,11 @@ CMakeFiles/kodowanie_huffmana.dir/main.cpp.o.ddi: \
  /usr/include/qt/QtWidgets/QMessageBox \
  /usr/include/qt/QtWidgets/qmessagebox.h \
  /usr/include/qt/QtCore/QTextStream /usr/include/qt/QtCore/qtextstream.h \
+ /usr/include/c++/14.2.1/iostream \
  /home/peccator/CLionProjects/kodowanie_huffmana/HuffmanCodec.h \
  /usr/include/qt/QtCore/QString /usr/include/qt/QtCore/qstring.h \
  /usr/include/qt/QtCore/QByteArray /usr/include/qt/QtCore/qbytearray.h \
- /usr/include/c++/14.2.1/iostream /usr/include/qt/QtWidgets/QMainWindow \
+ /usr/include/qt/QtWidgets/QMainWindow \
  /usr/include/qt/QtWidgets/qmainwindow.h \
  /usr/include/qt/QtWidgets/qtabwidget.h /usr/include/qt/QtGui/qicon.h \
  /usr/include/qt/QtWidgets/QTextEdit \
@@ -314,6 +315,4 @@ CMakeFiles/kodowanie_huffmana.dir/main.cpp.o.ddi: \
  /usr/include/qt/QtWidgets/qmenu.h /usr/include/qt/QtWidgets/qaction.h \
  /usr/include/qt/QtWidgets/qactiongroup.h \
  /usr/include/qt/QtWidgets/QAction /usr/include/qt/QtWidgets/qaction.h \
- /usr/include/qt/QtCore/QDebug /usr/include/qt/QtCore/qdebug.h \
- /usr/include/qt/QtCore/qtextstream.h /usr/include/qt/QtCore/qset.h \
- /usr/include/qt/QtCore/qcontiguouscache.h
+ /usr/include/qt/QtWidgets/QLabel /usr/include/qt/QtWidgets/qlabel.h

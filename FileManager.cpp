@@ -3,6 +3,7 @@
 //
 
 #include "FileManager.h"
+using namespace std;
 
 FileManager::FileManager (const QString &fileName)
     : fileName(fileName), file(fileName) {};
@@ -21,19 +22,18 @@ void FileManager::closeFile() {
     }
 };
 
-QString FileManager::readFile() {
+QByteArray FileManager::readFile() {
     if (file.isOpen()) {
-        QTextStream in(&file);
-        return in.readAll();
+        return file.readAll();
     } else {
-        return "";
+        return QByteArray();
     }
 };
 
-bool FileManager::writeFile(QString &content) {
+bool FileManager::writeFile(const QByteArray& data) {
+    cout << file.isOpen() << endl;
     if (file.isOpen()) {
-        QTextStream out(&file);
-        out << content;
+        file.write(data);
         return true;
     } else {
         return false;

@@ -9,14 +9,13 @@
 #include <memory>
 #include <unordered_map>
 #include <QByteArray>
-#include <iostream>
 
 
 class HuffmanCodec {
 public:
     HuffmanCodec();
-    bool encodeFile(const QString& filePath, const QString& outputPath);
-    bool decodeFile(const QString& filePath, const QString& outputPath);
+    QByteArray encodeFile(QByteArray data);
+    QByteArray decodeFile(QByteArray data);
 private:
     struct HuffmanNode {
         char symbol;
@@ -35,8 +34,6 @@ private:
     std::shared_ptr<HuffmanNode> buildHuffmanTree(const std::unordered_map<char, int>& frequencies);
     void generateHuffmanCodes(const std::shared_ptr<HuffmanNode>& node, const std::string& code, std::unordered_map<char, std::string>& codes);
     std::unordered_map<char, std::string> getHuffmanCodes(const std::shared_ptr<HuffmanNode>& root);
-    QByteArray readFile(const QString& filePath);
-    bool writeFile(const QString &outputPath, const QByteArray& data);
     QByteArray encodeData(const QByteArray& data, const std::unordered_map<char, std::string>& codes);
     QByteArray decodeData(const QByteArray& data);
 };
