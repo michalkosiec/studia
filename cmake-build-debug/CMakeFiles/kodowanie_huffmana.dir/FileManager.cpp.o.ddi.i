@@ -5,15 +5,7 @@
 # 1 "/usr/include/stdc-predef.h" 1 3 4
 # 0 "<command-line>" 2
 # 1 "/home/peccator/CLionProjects/kodowanie_huffmana/FileManager.cpp"
-
-
-
-
 # 1 "/home/peccator/CLionProjects/kodowanie_huffmana/FileManager.h" 1
-
-
-
-
 
 
 
@@ -142441,11 +142433,11 @@ constexpr inline QFlags<QFileDialog::Options::enum_type> operator|(QFileDialog::
 
 
 # 2 "/usr/include/qt/QtWidgets/QFileDialog" 2 3 4
-# 9 "/home/peccator/CLionProjects/kodowanie_huffmana/FileManager.h" 2
+# 5 "/home/peccator/CLionProjects/kodowanie_huffmana/FileManager.h" 2
 
 
 
-# 11 "/home/peccator/CLionProjects/kodowanie_huffmana/FileManager.h"
+# 7 "/home/peccator/CLionProjects/kodowanie_huffmana/FileManager.h"
 class FileManager {
 public:
     QString fileName;
@@ -142457,7 +142449,7 @@ public:
 private:
     QFile file;
 };
-# 6 "/home/peccator/CLionProjects/kodowanie_huffmana/FileManager.cpp" 2
+# 2 "/home/peccator/CLionProjects/kodowanie_huffmana/FileManager.cpp" 2
 
 using namespace std;
 

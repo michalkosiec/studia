@@ -1,7 +1,3 @@
-//
-// Created by peccator on 1/4/25.
-//
-
 #ifndef HUFFMANCODEC_H
 #define HUFFMANCODEC_H
 
@@ -17,6 +13,7 @@ public:
     QByteArray encodeFile(QByteArray data);
     QByteArray decodeFile(QByteArray data);
 private:
+    // Wezel bedacy czescia drzewa Huffmana
     struct HuffmanNode {
         char symbol;
         int freq;

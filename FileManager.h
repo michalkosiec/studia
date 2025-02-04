@@ -1,7 +1,3 @@
-//
-// Created by peccator on 1/2/25.
-//
-
 #ifndef FILEMANAGER_H
 #define FILEMANAGER_H
 

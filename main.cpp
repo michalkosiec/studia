@@ -9,6 +9,7 @@
 #include <QLabel>
 #include <QMessageBox>
 #include <QString>
+#include <memory>
 using namespace std;
 
 int main(int argc, char *argv[]) {
@@ -37,9 +38,10 @@ int main(int argc, char *argv[]) {
     QAction *decodeAction = new QAction("Dekoduj", &window);
 
     // Deklaracja i inicjalizacja zmiennych, ktore sluza do pracy z plikami oraz do kodowania Huffmana
-    FileManager* sourceFileManager = nullptr;
-    FileManager* destinationFileManager = nullptr;
     HuffmanCodec codec = HuffmanCodec();
+
+    unique_ptr<FileManager> sourceFileManager = nullptr;
+    unique_ptr<FileManager> destinationFileManager = nullptr;
 
     // Obsluga zdarzen w aplikacji Qt
     fileMenu->addAction(openAction);
@@ -51,7 +53,7 @@ int main(int argc, char *argv[]) {
     QObject::connect(openAction, &QAction::triggered, [&]() {
         QString fileName = QFileDialog::getOpenFileName(&window, "Otworz plik");
         if (!fileName.isEmpty()) {
-            sourceFileManager = new FileManager(fileName);
+            sourceFileManager = make_unique<FileManager>(fileName);
             if (!sourceFileManager->openFile()) {
                 QMessageBox::critical(nullptr, "Blad", "Nie udalo się otworzyc pliku");
             }
@@ -71,7 +73,7 @@ int main(int argc, char *argv[]) {
             return;
         }
         QString outputPath = QFileDialog::getSaveFileName(&window, "Zapisz zakodowany plik", "", "Pliki binarne (*.bin)");
-        destinationFileManager = new FileManager(outputPath);
+        destinationFileManager = make_unique<FileManager>(outputPath);
         if (destinationFileManager->openFile()) {
             const QByteArray encodedData = codec.encodeFile(sourceFileManager->readFile());
             destinationFileManager->writeFile(encodedData);
@@ -94,7 +96,7 @@ int main(int argc, char *argv[]) {
             return;
         }
         QString outputPath = QFileDialog::getSaveFileName(&window, "Zapisz zdekodowany plik", "", "Wszystkie pliki (*.*)");
-        destinationFileManager = new FileManager(outputPath);
+        destinationFileManager = make_unique<FileManager>(outputPath);
         if (destinationFileManager->openFile()) {
             const QByteArray decodedData = codec.decodeFile(sourceFileManager->readFile());
             destinationFileManager->writeFile(decodedData);
@@ -104,12 +106,6 @@ int main(int argc, char *argv[]) {
         }
     });
 
-    QObject::connect(&window, &QMainWindow::destroyed, [&]() {
-        delete sourceFileManager;
-        sourceFileManager = nullptr;
-        delete destinationFileManager;
-        destinationFileManager = nullptr;
-    });
 
     window.resize(800, 600);
     window.show();

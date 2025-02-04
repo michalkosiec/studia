@@ -1,7 +1,3 @@
-//
-// Created by peccator on 1/4/25.
-//
-
 #include "HuffmanCodec.h"
 #include "FileManager.h"
 #include <queue>
@@ -11,6 +7,9 @@ using namespace std;
 
 HuffmanCodec::HuffmanCodec() {}
 
+/*Funkcja encodeFile odpowiada za wezwanie wszystkich metod związanych z kodowaniem danych metodą Huffmana
+ *zwraca ona zakodowane dane
+ */
 QByteArray HuffmanCodec::encodeFile(QByteArray data) {
     if (data.isEmpty()) {
         return QByteArray();
@@ -21,6 +20,7 @@ QByteArray HuffmanCodec::encodeFile(QByteArray data) {
     const auto huffmanTree = buildHuffmanTree(frequencies);
     const auto codes = getHuffmanCodes(huffmanTree);
 
+    // Tworzenie nagłówka
     QByteArray header;
     for (const auto& [symbol, code] : codes) {
         header.append(symbol);
@@ -37,6 +37,7 @@ QByteArray HuffmanCodec::encodeFile(QByteArray data) {
     return encodedData;
 }
 
+/*Funkcja decodeFile odpowiada za wezwanie funkcji decodeData*/
 QByteArray HuffmanCodec::decodeFile(QByteArray data) {
     if (data.isEmpty()) {
         return QByteArray();
@@ -47,6 +48,7 @@ QByteArray HuffmanCodec::decodeFile(QByteArray data) {
    return decodedData;
 };
 
+/*Funkcja calculateFrequencies odpowiada za policzenie liczby wystąpień określonych symboli w pliku źródłowym*/
 unordered_map<char, int> HuffmanCodec::calculateFrequencies(const QByteArray& data) {
     unordered_map<char, int> frequencies;
     for (char byte : data) {
@@ -56,7 +58,9 @@ unordered_map<char, int> HuffmanCodec::calculateFrequencies(const QByteArray& da
 }
 
 
+/*Funkcja buildHuffmanTree odpowiada za zbudowanie drzewa Huffmana, przy wykorzystaniu kolejki priorytetowej, struct i pointerów*/
 shared_ptr<HuffmanCodec::HuffmanNode> HuffmanCodec::buildHuffmanTree(const std::unordered_map<char, int>& frequencies) {
+    // Jesli true to drugi element b ma wiekszy priorytet niż a
     auto comp = [](const shared_ptr<HuffmanNode>& a, const shared_ptr<HuffmanNode>& b) {
         return a->freq > b->freq;
     };
@@ -68,6 +72,7 @@ shared_ptr<HuffmanCodec::HuffmanNode> HuffmanCodec::buildHuffmanTree(const std::
 
     if (pq.empty()) return shared_ptr<HuffmanNode>();
 
+    // Łączenie wezłów o najmniejszym freq w pary do czasu otrzymania jednego wezla w kolejce
     while (pq.size() > 1) {
         auto left = pq.top();
         pq.pop();
@@ -82,6 +87,7 @@ shared_ptr<HuffmanCodec::HuffmanNode> HuffmanCodec::buildHuffmanTree(const std::
     return pq.top();
 }
 
+// Przypisanie kodów do danych wezłów wykorzystując rekurencję i wezel o najwiekszym freq
 void HuffmanCodec::generateHuffmanCodes(const std::shared_ptr<HuffmanNode>& node, const std::string& code, std::unordered_map<char, std::string>& codes) {
     if (node->left == nullptr && node->right == nullptr) {
         codes[node->symbol] = code;
@@ -95,12 +101,16 @@ void HuffmanCodec::generateHuffmanCodes(const std::shared_ptr<HuffmanNode>& node
     }
 }
 
+// Tworzenie mapy kodów symbol, kod
 unordered_map<char, string> HuffmanCodec::getHuffmanCodes(const shared_ptr<HuffmanNode>& root) {
     unordered_map<char, string> codes;
     generateHuffmanCodes(root, "", codes);
     return codes;
 }
 
+/* Kodowanie danych. Za kazdy symbol wstawia kod. Uzupelnia liczbe bitow do wielokrotnosci 8, zeby mozna bylo ja zapisac w postaci bajtow.
+ * Zamienia bity na bajty i dodaje informacje o paddingu (dopelnienie bitami do wielokrotnosci 8)
+ */
 QByteArray HuffmanCodec::encodeData(const QByteArray& data, const unordered_map<char, string>& codes) {
     string encodedString;
     for (char byte : data) {
@@ -128,8 +138,10 @@ QByteArray HuffmanCodec::encodeData(const QByteArray& data, const unordered_map<
     return encodedData;
 }
 
+/*Funkcja decodeData odpowiada za odkodowanie danych, które następnie zwraca*/
 QByteArray HuffmanCodec::decodeData(const QByteArray& data) {
 
+    // Odczytanie naglowka
     QByteArray header;
     int i = 0;
     while (i < data.size() && data[i] != '\x1E') {
@@ -143,6 +155,8 @@ QByteArray HuffmanCodec::decodeData(const QByteArray& data) {
     i++;
 
     QByteArray headerContent = header;
+
+    // Odtworzenie mapy kodow i symboli
     unordered_map<string, char> reverseCodes;
 
     QList<QByteArray> pairs = headerContent.split('\x1D');
@@ -157,6 +171,7 @@ QByteArray HuffmanCodec::decodeData(const QByteArray& data) {
 
     int paddingBits = static_cast<unsigned char>(encodedData[0]);
 
+    // Odczytanie zawartosci zakodowanego pliku z wylaczeniem bitow paddingu
     encodedData = encodedData.mid(1);
     string bitString;
     for (char byte : encodedData) {
@@ -169,6 +184,7 @@ QByteArray HuffmanCodec::decodeData(const QByteArray& data) {
         bitString.erase(bitString.size() - paddingBits);
     }
 
+    // Podmienienie kodow na symbole (odkodowywanie)
     QByteArray decodedData;
     string currentCode;
     for (const char bit : bitString) {

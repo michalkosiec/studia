@@ -1,7 +1,3 @@
-//
-// Created by peccator on 1/2/25.
-//
-
 #include "FileManager.h"
 
 using namespace std;
